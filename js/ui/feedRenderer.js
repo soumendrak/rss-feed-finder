@@ -85,20 +85,20 @@ export function renderFeeds(feeds) {
       typeSpan.className = 'feed-type';
       typeSpan.textContent = feed.feedType || feed.type || 'Feed';
       
-      // Create copy button
+      // Create copy button with modern UI
       const copyButton = document.createElement('button');
       copyButton.className = 'copy-button';
-      copyButton.textContent = 'Copy URL';
       copyButton.title = 'Copy feed URL to clipboard';
+      copyButton.setAttribute('aria-label', 'Copy URL');
       copyButton.dataset.url = feed.href;
       copyButton.addEventListener('click', async (event) => {
         event.preventDefault();
-        const url = event.target.dataset.url;
+        const url = event.currentTarget.dataset.url;
         try {
           await navigator.clipboard.writeText(url);
-          event.target.textContent = 'Copied!';
+          event.currentTarget.classList.add('copied');
           setTimeout(() => {
-            event.target.textContent = 'Copy URL';
+            event.currentTarget.classList.remove('copied');
           }, 2000);
         } catch (err) {
           console.error('Failed to copy text: ', err);
