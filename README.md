@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="icon.svg" alt="RSS Feed Finder Icon" width="128" height="128">
+</p>
+
 # RSS Feed Finder
 
 A browser extension that detects and validates RSS/Atom feeds on websites. This extension helps you discover feed URLs that might not be obvious or properly advertised on the websites you visit.
