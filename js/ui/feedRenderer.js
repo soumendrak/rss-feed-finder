@@ -1,6 +1,40 @@
 // Functions for rendering feed results in the UI
 
 /**
+ * Shows a subtle notification that text was copied to clipboard
+ * @param {string} text - The name or URL of what was copied
+ * @param {boolean} isError - Whether this is an error notification
+ */
+function showCopyNotification(text, isError = false) {
+  // Remove any existing notifications
+  const existingNotification = document.querySelector('.copy-notification');
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+  
+  // Create the notification element
+  const notification = document.createElement('div');
+  notification.className = 'copy-notification';
+  notification.textContent = isError ? 'Failed to copy to clipboard' : 'Copied to clipboard';
+  
+  // Add the notification to the document
+  document.body.appendChild(notification);
+  
+  // Trigger a reflow to enable the transition
+  notification.offsetHeight;
+  
+  // Make the notification visible
+  notification.classList.add('visible');
+  
+  // Remove the notification after 2 seconds
+  setTimeout(() => {
+    notification.classList.remove('visible');
+    // Remove from DOM after fade out completes
+    setTimeout(() => notification.remove(), 300);
+  }, 2000);
+}
+
+/**
  * Renders feed items in the UI
  * @param {Array} feeds - Array of feed objects to render
  */
@@ -82,23 +116,46 @@ export function renderFeeds(feeds) {
       typeSpan.className = 'feed-type';
       typeSpan.textContent = feed.feedType || feed.type || 'Feed';
       
-      // Create copy button with modern UI
+      // Create interactive copy button with modern UI
       const copyButton = document.createElement('button');
       copyButton.className = 'copy-button';
-      copyButton.title = 'Copy feed URL to clipboard';
       copyButton.setAttribute('aria-label', 'Copy URL');
       copyButton.dataset.url = feed.href;
+      
+      // Add interactive click handler
       copyButton.addEventListener('click', async (event) => {
         event.preventDefault();
-        const url = event.currentTarget.dataset.url;
+        const button = event.currentTarget;
+        const url = button.dataset.url;
+        
         try {
+          // Show copying animation
+          button.classList.add('copying');
+          
+          // Copy to clipboard
           await navigator.clipboard.writeText(url);
-          event.currentTarget.classList.add('copied');
+          
+          // Show success state with checkmark icon
+          button.classList.add('copied');
+          button.classList.remove('copying');
+          
+          // Show the notification
+          showCopyNotification(feed.title || url);
+          
+          // Play a subtle haptic feedback if available
+          if (window.navigator && window.navigator.vibrate) {
+            window.navigator.vibrate(50);
+          }
+          
+          // Reset button state after delay
           setTimeout(() => {
-            event.currentTarget.classList.remove('copied');
+            button.classList.remove('copied');
           }, 2000);
+          
         } catch (err) {
           console.error('Failed to copy text: ', err);
+          button.classList.remove('copying');
+          showCopyNotification('Failed to copy', true);
         }
       });
       

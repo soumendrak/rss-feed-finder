@@ -240,7 +240,7 @@ a:hover {
   font-style: italic;
 }
 
-/* Modern Copy Button */
+/* Modern Interactive Copy Button */
 .copy-button {
   background: none;
   border: none;
@@ -254,7 +254,7 @@ a:hover {
   transition: var(--transition);
   position: relative;
   color: transparent;
-  overflow: hidden;
+  overflow: visible;
   flex-shrink: 0;
 }
 
@@ -271,6 +271,59 @@ a:hover {
   background-repeat: no-repeat;
   opacity: 0.7;
   transition: var(--transition);
+  z-index: 1;
+}
+
+/* Ripple effect */
+.copy-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(110, 142, 251, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+  z-index: 0;
+}
+
+/* Copy notification */
+.copy-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-gradient);
+  color: white;
+  font-size: 0.75rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.copy-notification.visible {
+  opacity: 1;
+}
+
+.copy-notification::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .copy-button:hover {
@@ -282,11 +335,34 @@ a:hover {
 }
 
 .copy-button:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(30, 30);
+    opacity: 0;
+  }
+}
+
+/* Removed bouncing animation as requested */
 .copy-button.copied::before {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2343cea2"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+  /* No animation */
+}
+
+.copy-button.copying::after {
+  animation: ripple 0.8s ease-out;
+}
+
+.copy-button.copied .copy-tooltip,
+.copy-button:hover .copy-tooltip {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Controls */
