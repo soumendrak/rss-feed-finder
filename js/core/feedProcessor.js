@@ -86,13 +86,26 @@ export async function processFeeds(feeds) {
   // Wait for all validations to complete
   const validatedFeeds = await Promise.all(validatePromises);
   
-  // Combine the validated feeds with deferred feeds and info messages
+  // Only keep valid feeds and filter out all invalid ones
+  const validFeeds = validatedFeeds.filter(feed => {
+    // Only include feeds that are explicitly marked as valid
+    if (feed.isValid === true) {
+      return true;
+    }
+    
+    // Log any feeds we're filtering out
+    if (feed.validationError) {
+      console.log(`Filtering out invalid feed (${feed.validationError}): ${feed.href}`);
+    } else {
+      console.log(`Filtering out non-valid feed: ${feed.href}`);
+    }
+    return false;
+  });
+  
+  // We don't need to process the deferred feeds anymore since we only want to show valid feeds
+  // Just return the valid feeds and info messages
   const processedFeeds = [
-    ...validatedFeeds,
-    ...feedsToDefer.map(feed => ({
-      ...feed,
-      isPotential: true // Mark remaining feeds as potential/unverified
-    })),
+    ...validFeeds,
     ...infoFeeds
   ];
   

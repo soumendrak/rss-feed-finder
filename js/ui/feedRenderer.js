@@ -19,22 +19,19 @@ export function renderFeeds(feeds) {
   // Check if we have a "searching sitemap" indicator
   const isSearchingSitemap = feeds.some(feed => feed.isSearching && feed.href === '_sitemapSearch');
   
-  // Group feeds by status
+  // Group feeds by status - only valid feeds and info messages
   const validFeeds = [];
-  const potentialFeeds = [];
-  const invalidFeeds = [];
   const infoMessages = [];
   
-  // Sort feeds into categories
+  // Only include valid feeds and info messages
   feeds.forEach(feed => {
     if (feed.isInfo || feed.isSearching) {
       infoMessages.push(feed);
     } else if (feed.isValid === true) {
       validFeeds.push(feed);
-    } else if (feed.isValid === false) {
-      invalidFeeds.push(feed);
     } else {
-      potentialFeeds.push(feed);
+      // Log any invalid/potential feeds for debugging, but don't display them
+      console.log(`Not displaying non-valid feed: ${feed.href}`);
     }
   });
   
@@ -148,49 +145,11 @@ export function renderFeeds(feeds) {
     });
   }
   
-  // Then add potential feeds
-  if (potentialFeeds.length > 0 && (!isSearchingSitemap || validFeeds.length === 0)) {
-    const potentialHeader = document.createElement('li');
-    potentialHeader.className = 'feed-section-header';
-    potentialHeader.textContent = 'Potential Feeds (Unverified)';
-    feedsList.appendChild(potentialHeader);
-    
-    // Sort potential feeds: common paths first, then alphabetically
-    potentialFeeds.sort((a, b) => {
-      const aGenerated = a.type === 'generated' ? 1 : 0;
-      const bGenerated = b.type === 'generated' ? 1 : 0;
-      if (aGenerated !== bGenerated) {
-        return aGenerated - bGenerated;
-      }
-      return a.href.localeCompare(b.href);
-    });
-    
-    // Limit the number of potential feeds shown
-    const limit = isSearchingSitemap ? 5 : 15;
-    const feedsToShow = potentialFeeds.slice(0, limit);
-    
-    feedsToShow.forEach(feed => {
-      feedsList.appendChild(createFeedElement(feed));
-    });
-    
-    // Add a note if we truncated the list
-    if (potentialFeeds.length > limit) {
-      const truncatedNote = document.createElement('li');
-      truncatedNote.className = 'info-message';
-      truncatedNote.textContent = `${potentialFeeds.length - limit} more potential feeds not shown`;
-      feedsList.appendChild(truncatedNote);
-    }
-  }
-  
-  // Finally add invalid feeds
-  if (invalidFeeds.length > 0 && !isSearchingSitemap) {
-    const invalidHeader = document.createElement('li');
-    invalidHeader.className = 'feed-section-header';
-    invalidHeader.textContent = 'Invalid Feeds';
-    feedsList.appendChild(invalidHeader);
-    
-    invalidFeeds.forEach(feed => {
-      feedsList.appendChild(createFeedElement(feed));
-    });
+  // If no valid feeds were found, show a simple message
+  if (validFeeds.length === 0 && !isSearchingSitemap) {
+    const noValidFeedsNote = document.createElement('li');
+    noValidFeedsNote.className = 'info-message';
+    noValidFeedsNote.textContent = 'No valid RSS feeds were found on this page';
+    feedsList.appendChild(noValidFeedsNote);
   }
 }
