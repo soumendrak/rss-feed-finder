@@ -4,7 +4,9 @@
 
 # RSS Feed Finder
 
-![Screenshot](images/screenshot.png)
+<p align="center">
+  <img src="images/screenshot.png" alt="RSS Feed Finder Screenshot" width="424" height="296">
+</p>
 
 A browser extension that detects and validates RSS/Atom feeds on websites. This extension helps you discover feed URLs that might not be obvious or properly advertised on the websites you visit.
 
