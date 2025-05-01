@@ -9,8 +9,21 @@
 <body>
   <div id="container">
     <h2>RSS Feeds</h2>
+    <div id="options">
+      <label class="checkbox-container">
+        <input type="checkbox" id="deep-search">
+        <span class="checkmark"></span>
+        Deep search (scan sitemaps)
+      </label>
+      <button id="search-button">Search for Feeds</button>
+    </div>
+    
+    <div id="log-container">
+      <div id="log-messages"></div>
+    </div>
+    
     <ul id="feeds-list">
-      <li>Loading...</li>
+      <li class="info-message">Click the Search button to find RSS feeds</li>
     </ul>
   </div>
   <script src="popup.js"></script>

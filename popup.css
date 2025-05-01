@@ -71,7 +71,7 @@ li:hover { background-color: #f0f0f0; }
 .loading {
   text-align: center;
   color: #888;
-  padding: 10px;
+  padding: 20px 0;
   font-style: italic;
 }
 
@@ -114,4 +114,139 @@ a:hover { text-decoration: underline; }
 .copy-btn.copied {
   background: #4CAF50;
   color: white;
+}
+
+#options {
+  margin-bottom: 12px;
+  font-size: 0.9em;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ddd;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #FF8000;
+  border: 1px solid #FF8000;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+#search-button {
+  background-color: #FF8000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+#search-button:hover {
+  background-color: #E77200;
+}
+
+#search-button:active {
+  background-color: #CF6600;
+}
+
+.info-message {
+  text-align: center;
+  color: #666;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+/* Log display styles */
+#log-container {
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 1em;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#log-messages {
+  padding: 8px 12px;
+  color: #333;
+}
+
+.log-entry {
+  margin-bottom: 8px;
+  border-left: 3px solid #ccc;
+  padding: 4px 0 4px 8px;
+  line-height: 1.4;
+  font-size: 1.05em;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.log-entry.info {
+  border-left-color: #1976d2;
+}
+
+.log-entry.success {
+  border-left-color: #4CAF50;
+}
+
+.log-entry.warning {
+  border-left-color: #FF8000;
+}
+
+.log-entry.error {
+  border-left-color: #F44336;
 }

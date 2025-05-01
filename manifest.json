@@ -3,7 +3,7 @@
   "name": "RSS Feed Finder",
   "version": "1.0",
   "description": "Quickly find all RSS/Atom feed URLs on the current website.",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.svg"
