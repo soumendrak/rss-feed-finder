@@ -14,7 +14,7 @@ A browser extension that detects and validates RSS/Atom feeds on websites. This 
 
 - **Advanced Feed Detection**: Multiple methods to find both obvious and hidden feeds
 - **Smart Validation**: Only displays working RSS/Atom feeds, filtering out invalid or inaccessible URLs
-- **Deep Search Option**: Scans sitemaps to discover additional feeds
+- **Deep Search Option (In-Progress)**: Scans sitemaps to discover additional feeds
 - **Modern, Minimal UI**: Clean interface with gradient styling for excellent usability
 - **Enhanced Copy Feature**: One-click copying with visual confirmation
 - **Lightweight Implementation**: Fast performance with minimal resource usage
