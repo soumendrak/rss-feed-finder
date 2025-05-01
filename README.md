@@ -8,16 +8,16 @@
   <img src="images/screenshot.png" alt="RSS Feed Finder Screenshot" width="424" height="296">
 </p>
 
-A browser extension that detects and validates RSS/Atom feeds on websites. This extension helps you discover feed URLs that might not be obvious or properly advertised on the websites you visit.
+A browser extension that detects and validates RSS/Atom feeds on websites. This extension helps you discover valid feed URLs that might not be obvious or properly advertised on the websites you visit.
 
 ## Features
 
-- Advanced feed detection using multiple methods
-- Validation of feed URLs to ensure they're actually valid RSS/Atom feeds
-- Visual status indicators for valid, invalid, and suggested feeds
-- Easy copying of feed URLs with a single click
-- Clean, intuitive user interface
-- Lightweight implementation with minimal performance impact
+- **Advanced Feed Detection**: Multiple methods to find both obvious and hidden feeds
+- **Smart Validation**: Only displays working RSS/Atom feeds, filtering out invalid or inaccessible URLs
+- **Deep Search Option**: Scans sitemaps to discover additional feeds
+- **Modern, Minimal UI**: Clean interface with gradient styling for excellent usability
+- **Enhanced Copy Feature**: One-click copying with visual confirmation
+- **Lightweight Implementation**: Fast performance with minimal resource usage
 
 ## Installation Instructions
 
@@ -54,18 +54,18 @@ This extension needs to be installed in developer mode as an unpacked extension.
 
 1. Visit a website that you want to check for RSS/Atom feeds
 2. Click on the RSS Feed Finder extension icon in your browser toolbar
-3. The extension will automatically scan the current page for feeds
-4. Results will be displayed in the popup window with the following indicators:
-   - 🟢 Green: Valid RSS/Atom feed
-   - 🔴 Red: Invalid or inaccessible feed
-   - 🟡 Yellow: Suggested feed (needs verification)
-5. Click the copy button next to any feed URL to copy it to your clipboard
-6. Use the copied URL in your favorite RSS reader application
+3. Click the "Search for Feeds" button to scan the current page
+4. For more thorough searching, enable the "Deep search" option to scan sitemaps
+5. Only valid, working RSS/Atom feeds will be displayed in the results
+6. Click the copy icon next to any feed to copy its URL to your clipboard
+7. A notification will confirm when the URL has been copied
+8. Use the copied URL in your favorite RSS reader application
 
 ## Troubleshooting
 
-- If no feeds are found on a page that you know has feeds, try refreshing the page and clicking the extension icon again
-- Some websites may block access to their feeds from browser extensions due to CORS policies
+- If no feeds are found on a page that you know has feeds, try enabling the "Deep search" option
+- Some websites may hide their feeds or make them difficult to detect
+- The extension filters out invalid and inaccessible feeds, so only working feeds will be shown
 - If the extension stops working, try reinstalling it following the installation steps
 
 ## Privacy
