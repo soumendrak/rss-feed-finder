@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="64" fill="#FF8000"/>
+  
+  <!-- RSS Icon Elements -->
+  <g transform="translate(24, 24) scale(0.8)">
+    <!-- RSS Dot -->
+    <circle cx="32" cy="96" r="12" fill="white"/>
+    
+    <!-- Small RSS Arc -->
+    <path d="M32,64 C49.673,64 64,78.327 64,96 L52,96 C52,85.163 43.046,76 32,76 L32,64 Z" fill="white"/>
+    
+    <!-- Medium RSS Arc -->
+    <path d="M32,44 C60.718,44 84,67.282 84,96 L72,96 C72,73.91 54.09,56 32,56 L32,44 Z" fill="white"/>
+    
+    <!-- Large RSS Arc -->
+    <path d="M32,24 C71.765,24 104,56.235 104,96 L92,96 C92,62.944 65.056,36 32,36 L32,24 Z" fill="white"/>
+  </g>
+</svg>
