@@ -72,6 +72,10 @@ This extension needs to be installed in developer mode as an unpacked extension.
 
 This extension only runs when you click its icon and does not track your browsing activity. It only accesses the current tab's content to find feed URLs.
 
+## Sponsor
+
+If this project helps you, consider [sponsoring my work on GitHub](https://github.com/sponsors/soumendrak). Your support helps fund maintenance, documentation, and continued development.
+
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
